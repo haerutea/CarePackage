@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+<!--
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:hint="@string/change_username"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint=""
+            android:ems="10"
+            android:inputType="phone" />
+-->
+        <Button
+            android:id="@+id/change_password_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change_password"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp" />
+
+        <Button
+            android:id="@+id/change_medication_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/change_medication"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp" />
+
+        <Button
+            android:id="@+id/resend_email_button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/resend_email"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp" />
+
+
+    </TableLayout>
+</ScrollView>

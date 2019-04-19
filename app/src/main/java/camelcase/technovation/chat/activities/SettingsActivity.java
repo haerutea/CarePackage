@@ -2,11 +2,13 @@ package camelcase.technovation.chat.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
+import camelcase.technovation.BaseActivity;
 import camelcase.technovation.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -20,7 +22,7 @@ import camelcase.technovation.chat.fragments.ChangePassswordFragment;
  * change medication button exists but is not yet implemented due to lack of access to
  * Whitney's code/logic.
  */
-public class SettingsActivity extends AppCompatActivity implements View.OnClickListener
+public class SettingsActivity extends BaseActivity implements View.OnClickListener
 {
 
     private FirebaseUser mUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -39,7 +41,10 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.settings_activity);
+
+        LayoutInflater inflater = getLayoutInflater();
+        inflater.inflate(R.layout.settings_activity, (ViewGroup) findViewById(R.id.contents));
+
         mUser.reload();
 
         changeMedication = findViewById(R.id.change_medication_button);

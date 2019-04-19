@@ -3,12 +3,14 @@ package camelcase.technovation.chat.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import camelcase.technovation.BaseActivity;
 import camelcase.technovation.R;
 import camelcase.technovation.chat.object_classes.Constants;
 import camelcase.technovation.chat.object_classes.User;
@@ -28,7 +30,7 @@ import camelcase.technovation.chat.utils.UserSharedPreferences;
  * where the profile of user is displayed, also where the user can connect to chat.
  * change it's settings, and see it's saved messages
  */
-public class ProfileActivity extends AppCompatActivity
+public class ProfileActivity extends BaseActivity
         implements View.OnClickListener
 {
     private final String LOG_TAG = "profileActivity";
@@ -44,9 +46,6 @@ public class ProfileActivity extends AppCompatActivity
     private TextView verification;
     private TextView username;
     private TextView email;
-    private Button chat;
-    private Button savedMsg;
-    private Button settings;
     private Button logout;
 
     /**
@@ -59,17 +58,17 @@ public class ProfileActivity extends AppCompatActivity
     protected final void onCreate(Bundle savedInstanceState)
     {
         Log.d("screen", "profile created");
-        setContentView(R.layout.profile_activity);
         super.onCreate(savedInstanceState);
+
+        LayoutInflater inflater = getLayoutInflater();
+        inflater.inflate(R.layout.profile_activity, (ViewGroup) findViewById(R.id.contents));
+
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
 
         verification = findViewById(R.id.profile_verification);
         username = findViewById(R.id.profile_username);
         email = findViewById(R.id.profile_email);
-        chat = findViewById(R.id.chat_button);
-        savedMsg = findViewById(R.id.saved_msg_button);
-        settings = findViewById(R.id.settings_button);
         logout = findViewById(R.id.log_out_button);
 
         userUid = mUser.getUid();
@@ -135,9 +134,6 @@ public class ProfileActivity extends AppCompatActivity
         //adds uid and username to sharedPreferences, it's done here to prevent these details
         //from missing when user logins from another device.
 
-        chat.setOnClickListener(this);
-        savedMsg.setOnClickListener(this);
-        settings.setOnClickListener(this);
         logout.setOnClickListener(this);
     }
 
@@ -148,28 +144,7 @@ public class ProfileActivity extends AppCompatActivity
     public void onClick(View v)
     {
         int id = v.getId();
-        if(id == chat.getId())
-        {
-            Log.d(LOG_TAG, "clicked on chat");
-            Intent intent = new Intent(getApplicationContext(), ConnectActivity.class);
-            intent.putExtra(Constants.CURRENT_USER_KEY, userAccount);
-            startActivity(intent);
-        }
-        else if(id == savedMsg.getId())
-        {
-            Log.d(LOG_TAG, "clicked on saved msg");
-            Intent intent = new Intent(getApplicationContext(), SavedMessagesActivity.class);
-            intent.putExtra(Constants.UID_KEY, userUid);
-            startActivity(intent);
-
-        }
-        else if(id == settings.getId())
-        {
-            Log.d(LOG_TAG, "clicked on settings");
-            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
-            startActivity(intent);
-        }
-        else if(id == logout.getId())
+        if(id == logout.getId())
         {
             Log.d(LOG_TAG, "clicked on logout");
             userAccount.setOnline(false);

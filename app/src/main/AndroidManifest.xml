@@ -18,14 +18,14 @@
         android:theme="@style/AppTheme">
 
         <!-- https://github.com/firebase/quickstart-android/blob/d307afe958a672bebdf3394c10017cc671c027e2/messaging/app/src/main/AndroidManifest.xml#L48-L52 -->
-        <service android:name="camelcase.technovation.chat.utils.FirebaseNotificationMessaging">
+        <service android:name=".chat.utils.FirebaseNotificationMessaging">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
         <activity
-            android:name="camelcase.technovation.chat.activities.AuthActivity"
+            android:name=".chat.activities.AuthActivity"
             android:label="@string/title_activity_auth">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,35 +34,37 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="camelcase.technovation.chat.activities.LoginActivity"
+            android:name=".chat.activities.LoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName="camelcase.technovation.chat.activities.AuthActivity">
+            android:parentActivityName=".chat.activities.AuthActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="camelcase.technovation.chat.activities.AuthActivity" />
         </activity>
         <activity
-            android:name="camelcase.technovation.chat.activities.SignUpActivity"
+            android:name=".chat.activities.SignUpActivity"
             android:label="@string/title_activity_sign_up"
-            android:parentActivityName="camelcase.technovation.chat.activities.AuthActivity">
+            android:parentActivityName=".chat.activities.AuthActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="camelcase.technovation.chat.activities.AuthActivity" />
         </activity>
         <activity
-            android:name="camelcase.technovation.chat.activities.ProfileActivity"
+            android:name=".chat.activities.ProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_profile" />
         <activity
-            android:name="camelcase.technovation.chat.activities.ConnectActivity"
+            android:name=".chat.activities.ConnectActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="@string/title_activity_connect">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="camelcase.technovation.chat.activities.ProfileActivity" />
         </activity>
         <activity
-            android:name="camelcase.technovation.chat.activities.ChatActivity"
+            android:name=".chat.activities.ChatActivity"
             android:label="@string/title_activity_chat"
-            android:parentActivityName="camelcase.technovation.chat.activities.ProfileActivity">
+            android:parentActivityName=".chat.activities.ProfileActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="camelcase.technovation.chat.activities.ProfileActivity" />
@@ -70,12 +72,15 @@
 
         <!-- https://developer.android.com/training/notify-user/navigation.html#ExtendedNotification -->
         <activity
-            android:name="camelcase.technovation.chat.activities.ConfirmActivity"
+            android:name=".chat.activities.ConfirmActivity"
             android:excludeFromRecents="true"
             android:taskAffinity="" />
-        <activity android:name="camelcase.technovation.chat.activities.SettingsActivity" />
-        <activity android:name="camelcase.technovation.chat.activities.StrengthsActivity" />
-        <activity android:name="camelcase.technovation.chat.activities.SavedMessagesActivity"></activity>
+        <activity android:name=".chat.activities.SettingsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".chat.activities.StrengthsActivity" />
+        <activity android:name=".chat.activities.SavedMessagesActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".BaseActivity" />
     </application>
 
 </manifest>

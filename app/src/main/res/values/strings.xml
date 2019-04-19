@@ -1,13 +1,11 @@
 <resources>
-    <string name="app_name">AnimalHelp</string>
+    <string name="app_name">Care Package</string>
 
+    <!-- login error messages -->
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
 
     <!-- related to login/auth -->
     <string name="firebase_status_fmt">Firebase User: %s</string>
@@ -28,13 +26,24 @@
     <string name="agree">Agree</string>
     <string name="disagree">Disagree</string>
 
-    <!-- related to profile -->
+    <!-- related to nav bar-->
+    <string name="nav_header_description">Navigation Drawer header</string>
+    <string name="home">Home</string>
+    <string name="chat">Chat</string>
+    <string name="connect">Connect to Chat</string>
+    <string name="saved_message">Saved Messages</string>
+    <string name="todo_list">To-do List</string>
+    <string name="mood_tracker">Mood Tracker</string>
+    <string name="open">Open Drawer</string>
+    <string name="close">Close Drawer</string>
+
+    <!-- related to home -->
+
     <string name="verified_email">Email is verified.</string>
     <string name="not_verified_email">Email is not verified.
         Some features may be unavailable.</string>
     <string name="username_text">Username: %1$s</string>
     <string name="email_text">Email: %1$s</string>
-    <string name="saved_message">Saved Messages</string>
     <string name="log_out">Log Out</string>
     <string name="logged_out">Logged Out</string>
     <string name="go_chat">Chat</string>
@@ -47,6 +56,8 @@
     <string name="resend_email">Resend Verification Email</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
+
+    <!-- chat -->
 
     <!-- related to chat/message -->
     <string name="send_button">Send</string>

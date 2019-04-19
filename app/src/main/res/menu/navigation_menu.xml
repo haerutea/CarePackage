@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/home"
+        android:icon="@drawable/home_black_icon"
+        android:title="@string/home" />
+
+    <item android:title="@string/chat">
+        <menu>
+            <item android:id="@+id/chat"
+                android:icon="@drawable/chat_black_icon"
+                android:title="@string/chat" />
+
+            <item android:id="@+id/saved"
+                android:icon="@drawable/star_border_black_icon"
+                android:title="@string/saved_message" />
+        </menu>
+    </item>
+
+    <item android:title="@string/mood_tracker">
+        <menu>
+        <item android:id="@+id/mood"
+            android:icon="@drawable/calendar_black_icon"
+            android:title="@string/mood_tracker" />
+        </menu>
+    </item>
+
+    <item android:title="@string/todo_list">
+        <menu>
+            <item android:id="@+id/todo"
+                android:icon="@drawable/list_black_icon"
+                android:title="@string/todo_list" />
+        </menu>
+    </item>
+
+    <item android:id="@+id/settings"
+        android:title="@string/settings"
+        android:icon="@drawable/settings_black_icon" />
+
+</menu>

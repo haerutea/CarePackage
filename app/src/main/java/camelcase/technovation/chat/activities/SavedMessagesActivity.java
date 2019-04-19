@@ -2,11 +2,13 @@ package camelcase.technovation.chat.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
+import camelcase.technovation.BaseActivity;
 import camelcase.technovation.R;
 import camelcase.technovation.chat.object_classes.Constants;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,12 +22,13 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import camelcase.technovation.chat.adapters.SavedMessagesAdapter;
+import camelcase.technovation.chat.utils.UserSharedPreferences;
 
 /**
  * activity that's shown when user pressed Saved Messages button in profile, simply lists
  * all the saved messages the user saved from chats so far
  */
-public class SavedMessagesActivity extends AppCompatActivity
+public class SavedMessagesActivity extends BaseActivity
 {
     private String currentUid;
     private DatabaseReference savedMessageRef;
@@ -43,8 +46,10 @@ public class SavedMessagesActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.saved_messages_activity);
-        currentUid = getIntent().getStringExtra(Constants.UID_KEY);
+        LayoutInflater inflater = getLayoutInflater();
+        inflater.inflate(R.layout.saved_messages_activity, (ViewGroup) findViewById(R.id.contents));
+
+        currentUid = UserSharedPreferences.getInstance(this).getStringInfo(Constants.UID_KEY);
         Log.d("savedMsg", currentUid);
         allMessages = new ArrayList<>();
 

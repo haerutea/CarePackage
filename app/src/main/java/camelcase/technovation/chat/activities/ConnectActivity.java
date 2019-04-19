@@ -5,15 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import camelcase.technovation.BaseActivity;
 import camelcase.technovation.R;
 import camelcase.technovation.chat.object_classes.Chat;
 import camelcase.technovation.chat.object_classes.Constants;
@@ -31,17 +33,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import camelcase.technovation.chat.utils.DialogUtils;
+import camelcase.technovation.chat.utils.UserSharedPreferences;
 
 /**
  * allows user to select preferences, creates new chat request and add to database,
  * has simple matching algorithm to match user to other users
  */
-public class ConnectActivity extends AppCompatActivity implements View.OnClickListener
+public class ConnectActivity extends BaseActivity implements View.OnClickListener
 {
 
     //variables
     private final String LOG_TAG = "ConnectActivity";
-    private User userAccount;
+    private String userUid;
+    private String userUsername;
     private User opposingUser;
     private final String AGE = "age";
     private String selectedAgeGroup;
@@ -74,10 +78,14 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.connect_activity);
+
+        LayoutInflater inflater = getLayoutInflater();
+        inflater.inflate(R.layout.connect_activity, (ViewGroup) findViewById(R.id.contents));
+
         unavailUsers = new ArrayList<>();
 
-        userAccount = (User) getIntent().getSerializableExtra(Constants.CURRENT_USER_KEY);
+        userUid = UserSharedPreferences.getInstance(this).getStringInfo(Constants.UID_KEY);
+        userUsername = UserSharedPreferences.getInstance(this).getStringInfo(Constants.USERNAME_KEY);
 
         bFind = findViewById(R.id.find_button);
         bFind.setOnClickListener(this);
@@ -178,7 +186,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
                     boolean age, category, language;
 
                     //if status-wise they're available, and they haven't not-accepted a request for this user recently
-                    if(!tempUser.getEmail().equals(userAccount.getEmail())
+                    if(!tempUser.getUid().equals(userUid)
                             && tempUser.getOnline() && !tempUser.getChatting()
                             && !unavailUsers.contains(tempUser))
                     {
@@ -224,8 +232,8 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
                     setPreferences.put(CATEGORY, selectedCategory);
                     setPreferences.put(LANGUAGE, selectedLanguage);
                     HashMap<String, Boolean> uid = new HashMap<>();
-                    uid.put(userAccount.getUid(), true);
-                    chatRequest = new Request(uid, userAccount.getUsername(), setPreferences);
+                    uid.put(userUid, true);
+                    chatRequest = new Request(uid, userUsername, setPreferences);
 
                     //add request details to userAccount branch
                     requestRef = Constants.BASE_INSTANCE.child(Constants.REQUEST_PATH)
@@ -281,7 +289,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot)
             {
-                bothUid = opposingUser.getUid() + userAccount.getUid();
+                bothUid = opposingUser.getUid() + userUid;
                 //https://firebase.google.com/docs/reference/android/com/google/firebase/database/DataSnapshot.html#hasChild(java.lang.String)
                 if(dataSnapshot.hasChild(bothUid))
                 {
@@ -326,7 +334,7 @@ public class ConnectActivity extends AppCompatActivity implements View.OnClickLi
      */
     private void connectChat()
     {
-        Chat chatlog = new Chat(opposingUser.getUid(), userAccount.getUid());
+        Chat chatlog = new Chat(opposingUser.getUid(), userUid);
         Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
         intent.putExtra(Constants.CHAT_ROOM_ID_KEY, bothUid);
         intent.putExtra(Constants.CHAT_OBJECT_KEY, chatlog);

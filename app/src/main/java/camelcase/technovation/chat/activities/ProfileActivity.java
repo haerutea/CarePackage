@@ -23,6 +23,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import camelcase.technovation.chat.utils.UserSharedPreferences;
 
@@ -75,6 +77,23 @@ public class ProfileActivity extends BaseActivity
         Log.d("email", "" + mUser.isEmailVerified());
         userRef = Constants.BASE_INSTANCE.child(Constants.USER_PATH).child(userUid);
         Log.d("userRef", userRef.toString());
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>()
+                {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task)
+                    {
+                        if (task.isSuccessful())
+                        {
+                            // Get new Instance ID token
+                            String token = task.getResult().getToken();
+
+                            Constants.BASE_INSTANCE.child(Constants.USER_PATH).child(userUid)
+                                    .child(Constants.TOKEN_KEY).child(token).setValue(true);
+                        }
+                    }
+                });
 
         final TaskCompletionSource<String> getUserSource = new TaskCompletionSource<>();
 

@@ -104,6 +104,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
             }
         }
     }
+
     private Chat userChatlog;
     private ArrayList<Message> messageContent;
 
@@ -145,7 +146,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHol
      * @param positionIndex position of new item in messageContent
      */
     @Override
-    public void onBindViewHolder(@NonNull MessageViewHolder messageHolder, int positionIndex) {
+    public void onBindViewHolder(@NonNull MessageViewHolder messageHolder, int positionIndex)
+    {
         Message data = messageContent.get(positionIndex);
         messageHolder.username.setText(data.getSenderName());
         messageHolder.message.setText(data.getMessage());

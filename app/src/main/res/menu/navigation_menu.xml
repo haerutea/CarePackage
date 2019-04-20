@@ -27,14 +27,18 @@
 
     <item android:title="@string/todo_list">
         <menu>
-            <item android:id="@+id/todo"
+            <item android:id="@+id/see_all_todo"
                 android:icon="@drawable/list_black_icon"
-                android:title="@string/todo_list" />
+                android:title="@string/all_todo" />
+            <item android:id="@+id/set_new_todo"
+                android:icon="@drawable/add_alert_black_icon"
+                android:title="@string/new_todo" />
         </menu>
     </item>
+    
+        <item android:id="@+id/settings"
+            android:title="@string/settings"
+            android:icon="@drawable/settings_black_icon" />
 
-    <item android:id="@+id/settings"
-        android:title="@string/settings"
-        android:icon="@drawable/settings_black_icon" />
 
 </menu>

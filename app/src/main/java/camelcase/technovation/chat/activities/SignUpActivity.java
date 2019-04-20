@@ -260,7 +260,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                         String token = task.getResult().getToken();
                         Constants.BASE_INSTANCE.child(Constants.USER_PATH).child(mUser.getUid()).
                                 child(Constants.TOKEN_KEY).child(token).setValue(true);
-                        UserSharedPreferences.getInstance(SignUpActivity.this).setInfo(Constants.TOKEN_KEY, token);
                     }
                 });
 

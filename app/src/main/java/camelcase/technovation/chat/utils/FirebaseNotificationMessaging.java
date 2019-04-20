@@ -1,5 +1,6 @@
 package camelcase.technovation.chat.utils;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import camelcase.technovation.chat.object_classes.Constants;
@@ -21,13 +22,14 @@ public class FirebaseNotificationMessaging extends FirebaseMessagingService
 
     //this whole class is basically from the quickstart file by Firebase.
     //https://github.com/firebase/quickstart-android/blob/4017aac2bdc591dc8b9702953702f09921a4e76d/messaging/app/src/main/java/com/google/firebase/quickstart/fcm/java/MyFirebaseMessagingService.java
-    private final String logTag = "messagingSerivce";
+    private final String logTag = "messagingService";
     /**
      * Called when message is received.
      * @param remoteMessage Object representing the message received from Firebase Cloud Messaging.
      */
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
+    public void onMessageReceived(RemoteMessage remoteMessage)
+    {
         Log.d(logTag, "From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
@@ -63,19 +65,24 @@ public class FirebaseNotificationMessaging extends FirebaseMessagingService
      * is initially generated so this is where you would retrieve the token.
      */
     @Override
-    public void onNewToken(String token)
+    public void onNewToken(final String token)
     {
         Log.d(logTag, "new token: " + token);
-
         //have to do this because UID might not have been saved to sharedPreferences
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if(user != null)
+        FirebaseAuth.getInstance().addAuthStateListener(new FirebaseAuth.AuthStateListener()
         {
-            String uid = user.getUid();
-            Constants.BASE_INSTANCE.child(Constants.USER_PATH).child(uid)
-                    .child(Constants.TOKEN_KEY).child(token).setValue(true);
-            //change token value in sharedPref
-            UserSharedPreferences.getInstance(this).setInfo(Constants.TOKEN_KEY, token);
-        }
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth)
+            {
+               FirebaseUser user = firebaseAuth.getCurrentUser();
+                Log.d("token Uid", user.getUid());
+                if(user != null)
+                {
+                    String uid = user.getUid();
+                    Constants.BASE_INSTANCE.child(Constants.USER_PATH).child(uid)
+                            .child(Constants.TOKEN_KEY).child(token).setValue(true);
+                }
+            }
+        });
     }
 }

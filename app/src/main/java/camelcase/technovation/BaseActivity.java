@@ -5,9 +5,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-
 import android.content.Intent;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.Toolbar;
@@ -16,6 +14,8 @@ import camelcase.technovation.chat.activities.ConnectActivity;
 import camelcase.technovation.chat.activities.ProfileActivity;
 import camelcase.technovation.chat.activities.SavedMessagesActivity;
 import camelcase.technovation.chat.activities.SettingsActivity;
+import camelcase.technovation.todo.activities.NotificationViewActivity;
+import camelcase.technovation.todo.activities.SetNotificationActivity;
 
 //https://stackoverflow.com/questions/16144399/sidebar-in-each-activity
 public class BaseActivity extends AppCompatActivity
@@ -80,8 +80,15 @@ public class BaseActivity extends AppCompatActivity
         else if(id == R.id.mood)
         {
         }
-        else if(id == R.id.todo)
+        else if(id == R.id.see_all_todo)
         {
+            Intent intent = new Intent(getApplicationContext(), NotificationViewActivity.class);
+            startActivity(intent);
+        }
+        else if(id == R.id.set_new_todo)
+        {
+            Intent intent = new Intent(getApplicationContext(), SetNotificationActivity.class);
+            startActivity(intent);
         }
         else if (id == R.id.settings)
         {

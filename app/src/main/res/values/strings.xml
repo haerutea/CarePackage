@@ -36,6 +36,8 @@
     <string name="all_todo">All Tasks</string>
     <string name="new_todo">Make New Task</string>
     <string name="mood_tracker">Mood Tracker</string>
+    <string name="analysis">Analysis</string>
+    <string name="common_factors">Common Factors</string>
     <string name="open">Open Drawer</string>
     <string name="close">Close Drawer</string>
 
@@ -81,6 +83,11 @@
     <!--to-do list-->
     <string name="channel_name">temp_Name</string>
     <string name="channel_description">temp_Desc</string>
+
+    <!-- calendar -->
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
     <!-- Activity titles -->
     <string name="title_activity_auth">Care Package</string>

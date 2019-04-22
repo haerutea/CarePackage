@@ -22,6 +22,16 @@
         <item android:id="@+id/mood"
             android:icon="@drawable/calendar_black_icon"
             android:title="@string/mood_tracker" />
+
+        <item
+            android:id="@+id/analysis"
+            android:icon="@drawable/ic_dashboard_black_24dp"
+            android:title="@string/analysis"/>
+
+        <item
+            android:id="@+id/common_factors"
+            android:icon="@android:drawable/ic_input_get"
+            android:title="@string/common_factors" />
         </menu>
     </item>
 
@@ -30,15 +40,17 @@
             <item android:id="@+id/see_all_todo"
                 android:icon="@drawable/list_black_icon"
                 android:title="@string/all_todo" />
+
             <item android:id="@+id/set_new_todo"
                 android:icon="@drawable/add_alert_black_icon"
                 android:title="@string/new_todo" />
         </menu>
     </item>
-    
+
+    <group android:id="@+id/settings_group">
         <item android:id="@+id/settings"
             android:title="@string/settings"
             android:icon="@drawable/settings_black_icon" />
-
+    </group>
 
 </menu>

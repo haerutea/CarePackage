@@ -1,6 +1,7 @@
 package camelcase.technovation;
 
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,10 +11,15 @@ import android.content.Intent;
 import android.support.v4.view.GravityCompat;
 import android.support.v7.widget.Toolbar;
 
+import camelcase.technovation.calendar.AnalysisActivity;
+import camelcase.technovation.calendar.CalendarActivity;
+import camelcase.technovation.calendar.CommonFactorsActivity;
+import camelcase.technovation.calendar.EntryStorage;
 import camelcase.technovation.chat.activities.ConnectActivity;
 import camelcase.technovation.chat.activities.ProfileActivity;
 import camelcase.technovation.chat.activities.SavedMessagesActivity;
 import camelcase.technovation.chat.activities.SettingsActivity;
+import camelcase.technovation.chat.object_classes.Constants;
 import camelcase.technovation.todo.activities.NotificationViewActivity;
 import camelcase.technovation.todo.activities.SetNotificationActivity;
 
@@ -21,6 +27,8 @@ import camelcase.technovation.todo.activities.SetNotificationActivity;
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener
 {
+
+    private EntryStorage entryStorage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -39,6 +47,8 @@ public class BaseActivity extends AppCompatActivity
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        entryStorage = new EntryStorage();
     }
 
     @Override
@@ -79,7 +89,23 @@ public class BaseActivity extends AppCompatActivity
         }
         else if(id == R.id.mood)
         {
+            Intent intent = new Intent(getApplicationContext(), CalendarActivity.class);
+            intent.putExtra(Constants.ENTRY_STORAGE_KEY, entryStorage);
+            startActivity(intent);
         }
+        else if(id == R.id.analysis)
+        {
+            Intent intent = new Intent(getApplicationContext(), AnalysisActivity.class);
+            intent.putExtra(Constants.ENTRY_STORAGE_KEY, entryStorage);
+            startActivity(intent);
+        }
+        else if(id == R.id.common_factors)
+        {
+            Intent intent = new Intent(getApplicationContext(), CommonFactorsActivity.class);
+            intent.putExtra(Constants.ENTRY_STORAGE_KEY, entryStorage);
+            startActivity(intent);
+        }
+
         else if(id == R.id.see_all_todo)
         {
             Intent intent = new Intent(getApplicationContext(), NotificationViewActivity.class);
@@ -99,5 +125,18 @@ public class BaseActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private boolean loadFragment(Fragment fragment)
+    {
+        if (fragment != null)
+        {
+            getSupportFragmentManager()
+                    .beginTransaction() //begin transaction
+                    .replace(R.id.contents, fragment) //put the fragment in the fragment container
+                    .commit(); //commit the changes
+            return true;
+        }
+        return false;
     }
 }

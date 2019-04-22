@@ -21,6 +21,7 @@ android {
         main {
             res.srcDirs =
                     [
+                            'src/main/res/layouts/calendar',
                             'src/main/res/layouts/todo',
                             'src/main/res/layouts/chat',
                             'src/main/res/layouts',
@@ -50,6 +51,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -41,6 +41,7 @@ public class Constants {
     public static final String CHAT_ROOM_ID_KEY = "chatRoomId";
     public static final String CHECKED_STRENGTHS_KEY = "checkedKey";
     public static final String CHAT_OBJECT_KEY = "chatObject";
+    public static final String ENTRY_STORAGE_KEY = "entryStorage";
 
     //for notifications
     public static final String CHANNEL_ID = "AnimalChatID";
